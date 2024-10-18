@@ -1,6 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const userDb = require("../db/userDb");
+const userDb = require("../db/queries");
 const bcrypt = require("bcrypt");
 
 const filedOptions = {
