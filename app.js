@@ -4,10 +4,11 @@ const passport = require("passport");
 const path = require("path");
 const app = express();
 const authRouter = require("./routes/authRouter");
-require("dotenv");
+require("dotenv").config();
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: false }));
 
 require("./config/passport");
 
@@ -28,6 +29,11 @@ app.get("/", (req, res) => {
 });
 
 app.use(authRouter);
+
+app.use((err, req, res, next) => {
+  console.log(err);
+  res.send("An error occurred on server side");
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, console.log(`Express app listening on port: ${PORT}`));
