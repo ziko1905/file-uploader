@@ -1,6 +1,6 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const userDb = require("../db/queries");
+const queries = require("../db/queries");
 const bcrypt = require("bcrypt");
 
 const filedOptions = {
@@ -9,13 +9,13 @@ const filedOptions = {
 
 const validationFunction = async (email, password, done) => {
   try {
-    const user = await userDb.getByEmail(email);
+    const user = await queries.getUserByEmail(email);
 
     if (!user) {
       return done(null, false, { message: "Invalid email or password" });
     }
 
-    const match = bcrypt.compareSync(user.password, password);
+    const match = bcrypt.compareSync(password, user.password);
 
     if (!match) {
       return done(null, false, { message: "Invalid email or password" });
@@ -37,7 +37,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
   try {
-    const user = userDb.getById(done);
+    const user = queries.getUserById(done);
   } catch (err) {
     done(err);
   }

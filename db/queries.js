@@ -3,7 +3,7 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.$connect();
-  module.exports.getByEmail = async (email) => {
+  module.exports.getUserByEmail = async (email) => {
     return await prisma.user.findUnique({
       where: {
         email: email,
@@ -11,7 +11,7 @@ async function main() {
     });
   };
 
-  module.exports.getById = async (id) => {
+  module.exports.getUserById = async (id) => {
     return await prisma.user.findUnique({
       where: {
         id: id,
