@@ -1,5 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const bcrypt = require("bcrypt");
+require("dotenv").config();
 
 async function main() {
   await prisma.$connect();
@@ -19,6 +21,19 @@ async function main() {
     });
   };
 }
+
+module.exports.addUser = async (firstName, lastName, email, password) => {
+  password = bcrypt.hashSync(password, +process.env.SALT);
+
+  await prisma.user.create({
+    data: {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    },
+  });
+};
 
 main()
   .then(async () => {
