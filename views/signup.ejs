@@ -10,7 +10,6 @@
     <% if (locals.errors) {%>
         <ul>
             <% locals.errors.forEach(err => { %>
-                <% console.log(err) %>
                 <li><%= err.msg %></li>
             <% }) %>
         </ul>

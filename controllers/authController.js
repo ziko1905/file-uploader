@@ -35,8 +35,6 @@ validateUser = [
     .notEmpty()
     .withMessage("Password confirmation is required")
     .custom((value, { req }) => {
-      console.log(value);
-      console.log(req.body.password);
       if (value != req.body.password) {
         throw new Error("Passwords must match");
       }
