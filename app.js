@@ -1,5 +1,7 @@
 const express = require("express");
 const session = require("express-session");
+const { PrismaSessionStore } = require("@quixo3/prisma-session-store");
+const { PrismaClient } = require("@prisma/client");
 const passport = require("passport");
 const path = require("path");
 const app = express();
@@ -20,12 +22,18 @@ app.use(
     cookie: {
       maxAge: 1000 * 60 * 60 * 24 * 14,
     },
+    store: new PrismaSessionStore(new PrismaClient(), {
+      checkPeriod: 2 * 60 * 1000,
+      dbRecordIdIsSessionId: true,
+      dbRecordIdFunction: undefined,
+    }),
   })
 );
 app.use(passport.session());
 
-app.get("/", (req, res) => {
-  res.send("<h1>Hello pretty</h1>");
+app.use((req, res, next) => {
+  res.locals.user = req.user;
+  next();
 });
 
 app.use(authRouter);
