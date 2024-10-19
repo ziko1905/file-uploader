@@ -5,6 +5,7 @@ const { PrismaClient } = require("@prisma/client");
 const passport = require("passport");
 const path = require("path");
 const app = express();
+const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
 require("dotenv").config();
 
@@ -36,6 +37,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(indexRouter);
 app.use(authRouter);
 
 app.use((err, req, res, next) => {
