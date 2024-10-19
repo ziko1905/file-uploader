@@ -6,6 +6,7 @@
     <title>File Uploader</title>
 </head>
 <body>
+    <%- include("./partials/navbar") %>
     <h1><%= locals.user ? 'Homepage' : 'File uploader' %></h1>
     <% if (!locals.user) { %>
         <p>Please login or signup to use this service.</p>
