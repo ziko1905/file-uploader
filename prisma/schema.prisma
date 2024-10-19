@@ -21,27 +21,26 @@ model Session {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  firstName    String   @db.VarChar(40)
-  lastName     String   @db.VarChar(40)
-  email        String   @unique
-  password     String
-  mainFolderId Int      @unique
-  folders      Folder[]
+  id        Int      @id @default(autoincrement())
+  firstName String   @db.VarChar(40)
+  lastName  String   @db.VarChar(40)
+  email     String   @unique
+  password  String
+  folders   Folder[]
 }
 
 model Folder {
   id              Int      @id @default(autoincrement())
   name            String   @db.VarChar(64)
   creationDate    DateTime @default(now())
+  isMain          Boolean  @default(false)
   // Optional bcs of main folder witch does not have parent folder
   parentFolder    Folder?  @relation("ParentChildrenFolder", fields: [parentFolderId], references: [id])
   parentFolderId  Int?
   childrenFolders Folder[] @relation("ParentChildrenFolder")
   files           File[]
-
-  User   User @relation(fields: [userId], references: [id])
-  userId Int
+  user            User     @relation(fields: [userId], references: [id])
+  userId          Int
 }
 
 model File {

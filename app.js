@@ -7,6 +7,7 @@ const path = require("path");
 const app = express();
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
+const fileRouter = require("./routes/fileRouter");
 require("dotenv").config();
 
 app.set("views", path.join(__dirname, "views"));
@@ -39,6 +40,7 @@ app.use((req, res, next) => {
 
 app.use(indexRouter);
 app.use(authRouter);
+app.use(fileRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
