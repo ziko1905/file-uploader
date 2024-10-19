@@ -1,22 +1,22 @@
 const { Router } = require("express");
 const router = new Router();
 const authController = require("../controllers/authController");
-const isNotAuthenticated = require("../middleware/isNotAuth");
+const isNotAuth = require("../middleware/isNotAuth");
+const isAuth = require("../middleware/isAuth");
 const passport = require("passport");
 
-router.get("/signup", isNotAuthenticated, authController.signupGet);
-router.get("/login", isNotAuthenticated, authController.loginGet);
-// router.get("/logout");
+router.get("/signup", isNotAuth, authController.signupGet);
+router.get("/login", isNotAuth, authController.loginGet);
+router.get("/logout", isAuth, authController.logoutGet);
 router.post(
   "/signup",
-  isNotAuthenticated,
+  isNotAuth,
   authController.signupPost,
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/signup",
   })
 );
-router.post("/login", isNotAuthenticated, authController.loginPost);
-// router.post("/logout");
+router.post("/login", isNotAuth, authController.loginPost);
 
 module.exports = router;
