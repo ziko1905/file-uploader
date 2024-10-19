@@ -5,7 +5,7 @@ const isNotAuthenticated = require("../middleware/isNotAuth");
 const passport = require("passport");
 
 router.get("/signup", isNotAuthenticated, authController.signupGet);
-// router.get("/login");
+router.get("/login", isNotAuthenticated, authController.loginGet);
 // router.get("/logout");
 router.post(
   "/signup",
@@ -16,7 +16,7 @@ router.post(
     failureRedirect: "/signup",
   })
 );
-// router.post("/login");
+router.post("/login", isNotAuthenticated, authController.loginPost);
 // router.post("/logout");
 
 module.exports = router;

@@ -65,7 +65,42 @@ const signupPost = [
   }),
 ];
 
+function loginGet(req, res) {
+  res.render("login");
+}
+
+const loginPost = [
+  body("email")
+    .notEmpty()
+    .withMessage("Email is required")
+    .isEmail()
+    .withMessage("Email must be in (example@example.com) form"),
+  body("password").notEmpty().withMessage("Password is required"),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.render("login", { errors: errors.array() });
+    }
+
+    passport.authenticate("local", (err, user, info) => {
+      if (err) {
+        return next(err);
+      }
+
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err);
+        }
+        res.redirect("/");
+      });
+    })(req, res, next);
+  }),
+];
+
 module.exports = {
   signupGet,
   signupPost,
+  loginGet,
+  loginPost,
 };
