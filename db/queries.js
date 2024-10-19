@@ -31,6 +31,11 @@ module.exports.addUser = async (firstName, lastName, email, password) => {
       lastName: lastName,
       email: email,
       password: password,
+      mainFolder: {
+        create: {
+          name: "main",
+        },
+      },
     },
   });
 };
