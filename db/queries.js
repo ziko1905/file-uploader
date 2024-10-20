@@ -78,10 +78,16 @@ module.exports.getChildren = async (folderId) => {
       where: {
         parentFolderId: folderId,
       },
+      orderBy: {
+        creationDate: "desc",
+      },
     }),
     prisma.file.findMany({
       where: {
         folderId: folderId,
+      },
+      orderBy: {
+        uploadDate: "desc",
       },
     }),
   ]);

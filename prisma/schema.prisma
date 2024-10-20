@@ -34,6 +34,7 @@ model Folder {
   name            String   @db.VarChar(64)
   creationDate    DateTime @default(now())
   isMain          Boolean  @default(false)
+  type            Type     @default(FOLDER)
   // Optional bcs of main folder witch does not have parent folder
   parentFolder    Folder?  @relation("ParentChildrenFolder", fields: [parentFolderId], references: [id])
   parentFolderId  Int?
@@ -49,6 +50,12 @@ model File {
   uploadDate DateTime @default(now())
   extension  String   @db.VarChar(32)
   size       Int?
+  type       Type     @default(FILE)
   Folder     Folder   @relation(fields: [folderId], references: [id])
   folderId   Int
+}
+
+enum Type {
+  FOLDER
+  FILE
 }
