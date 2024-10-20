@@ -58,7 +58,7 @@ module.exports.addFileToFolder = async (
 ) => {
   await prisma.folder.update({
     where: {
-      id: folderId,
+      id: +folderId,
     },
     data: {
       files: {
@@ -91,7 +91,7 @@ module.exports.getChildren = async (folderId) => {
 module.exports.makeFolder = async (parentFolderId, folderName, userId) => {
   await prisma.folder.create({
     data: {
-      parentFolderId: parentFolderId,
+      parentFolderId: +parentFolderId,
       name: folderName,
       userId: userId,
     },

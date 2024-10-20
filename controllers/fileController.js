@@ -17,7 +17,7 @@ const uploadFilePost = [
       return res.redirect(req.originalUrl);
     }
     await queries.addFileToFolder(
-      +req.params.folderId,
+      req.params.folderId,
       convertFilename(req.file.originalname),
       getFileExtension(req.file.originalname),
       req.file.size

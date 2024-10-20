@@ -7,7 +7,7 @@ function makeFolderGet(req, res) {
 
 const makeFolderPost = asyncHandler(async (req, res) => {
   await queries.makeFolder(
-    +req.params.folderId,
+    req.params.folderId,
     req.body.folderName,
     req.user.id
   );
