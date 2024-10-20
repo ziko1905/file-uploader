@@ -88,6 +88,16 @@ module.exports.getChildren = async (folderId) => {
   return [...children[0], ...children[1]];
 };
 
+module.exports.makeFolder = async (parentFolderId, folderName, userId) => {
+  await prisma.folder.create({
+    data: {
+      parentFolderId: parentFolderId,
+      name: folderName,
+      userId: userId,
+    },
+  });
+};
+
 main()
   .then(async () => {
     await prisma.$disconnect();

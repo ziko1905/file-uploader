@@ -8,6 +8,7 @@ const app = express();
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
 const fileRouter = require("./routes/fileRouter");
+const folderRouter = require("./routes/folderRouter");
 const queries = require("./db/queries");
 require("dotenv").config();
 
@@ -46,6 +47,7 @@ app.use(async (req, res, next) => {
 app.use(indexRouter);
 app.use(authRouter);
 app.use(fileRouter);
+app.use(folderRouter);
 
 app.use((err, req, res, next) => {
   console.log(err);
