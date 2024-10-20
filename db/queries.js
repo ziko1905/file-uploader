@@ -41,6 +41,53 @@ module.exports.addUser = async (firstName, lastName, email, password) => {
   });
 };
 
+module.exports.getMainFolder = async (userId) => {
+  return await prisma.folder.findFirst({
+    where: {
+      userId: userId,
+      isMain: true,
+    },
+  });
+};
+
+module.exports.addFileToFolder = async (
+  folderId,
+  fileName,
+  extension,
+  size
+) => {
+  await prisma.folder.update({
+    where: {
+      id: folderId,
+    },
+    data: {
+      files: {
+        create: {
+          name: fileName,
+          extension: extension,
+          size: size,
+        },
+      },
+    },
+  });
+};
+
+module.exports.getChildren = async (folderId) => {
+  const children = await Promise.all([
+    prisma.folder.findMany({
+      where: {
+        parentFolderId: folderId,
+      },
+    }),
+    prisma.file.findMany({
+      where: {
+        folderId: folderId,
+      },
+    }),
+  ]);
+  return [...children[0], ...children[1]];
+};
+
 main()
   .then(async () => {
     await prisma.$disconnect();

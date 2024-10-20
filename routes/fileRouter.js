@@ -3,7 +3,7 @@ const fileController = require("../controllers/fileController");
 const isAuth = require("../middleware/isAuth");
 const router = new Router();
 
-router.get("/upload", isAuth, fileController.uploadFileGet);
-router.post("/upload", isAuth, fileController.uploadFilePost);
+router.get("/:folderId/upload", isAuth, fileController.uploadFileGet);
+router.post("/:folderId/upload", isAuth, fileController.uploadFilePost);
 
 module.exports = router;

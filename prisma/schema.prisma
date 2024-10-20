@@ -44,7 +44,7 @@ model Folder {
 }
 
 model File {
-  id         Int      @id
+  id         Int      @id @default(autoincrement())
   name       String   @db.VarChar(64)
   uploadDate DateTime @default(now())
   extension  String   @db.VarChar(32)

@@ -8,6 +8,7 @@ const app = express();
 const indexRouter = require("./routes/indexRouter");
 const authRouter = require("./routes/authRouter");
 const fileRouter = require("./routes/fileRouter");
+const queries = require("./db/queries");
 require("dotenv").config();
 
 app.set("views", path.join(__dirname, "views"));
@@ -33,8 +34,12 @@ app.use(
 );
 app.use(passport.session());
 
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.user = req.user;
+  if (req.user) {
+    req.folder = await queries.getMainFolder(req.user.id);
+    res.locals.folderId = req.folder.id;
+  }
   next();
 });
 

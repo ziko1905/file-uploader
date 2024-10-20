@@ -8,7 +8,7 @@
 <body>
     <%- include("./partials/navbar") %>
     <h1>Upload file</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
+    <form action="/<%= locals.folderId %>/upload" method="POST" enctype="multipart/form-data">
         <input type="file" name="file" id="file">
         <button type="submit">Upload</button>
     </form>
