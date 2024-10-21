@@ -117,6 +117,21 @@ module.exports.checkFolderOwner = async (folderId, userId) => {
   }));
 };
 
+module.exports.checkFileOwner = async (fileId, userId) => {
+  return !!(await prisma.user.findFirst({
+    where: {
+      id: +userId,
+      folders: {
+        some: {
+          files: {
+            some: { id: +fileId },
+          },
+        },
+      },
+    },
+  }));
+};
+
 module.exports.updateFolder = async (id, folderName) => {
   await prisma.folder.update({
     where: {
@@ -128,10 +143,29 @@ module.exports.updateFolder = async (id, folderName) => {
   });
 };
 
+module.exports.updateFile = async (id, fileName) => {
+  await prisma.file.update({
+    where: {
+      id: +id,
+    },
+    data: {
+      name: fileName,
+    },
+  });
+};
+
 module.exports.getFolderById = async (folderId) => {
   return await prisma.folder.findFirst({
     where: {
       id: +folderId,
+    },
+  });
+};
+
+module.exports.getFileById = async (fileId) => {
+  return await prisma.file.findFirst({
+    where: {
+      id: +fileId,
     },
   });
 };
@@ -145,6 +179,14 @@ module.exports.deleteFolder = async (folderId) => {
   await prisma.folder.delete({
     where: {
       id: +folderId,
+    },
+  });
+};
+
+module.exports.deleteFile = async (fileId) => {
+  await prisma.file.delete({
+    where: {
+      id: +fileId,
     },
   });
 };

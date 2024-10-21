@@ -27,7 +27,25 @@ const uploadFilePost = [
   }),
 ];
 
+const detailsGet = asyncHandler(async (req, res) => {
+  res.locals.file = await queries.getFileById(req.params.fileId);
+  res.render("fileDetails");
+});
+
+const detailsPost = asyncHandler(async (req, res) => {
+  await queries.updateFile(req.params.fileId, req.body.name);
+  res.redirect(req.originalUrl);
+});
+
+const deleteGet = asyncHandler(async (req, res) => {
+  await queries.deleteFile(req.params.fileId);
+  res.redirect("/");
+});
+
 module.exports = {
   uploadFileGet,
   uploadFilePost,
+  detailsGet,
+  detailsPost,
+  deleteGet,
 };

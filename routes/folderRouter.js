@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const isAuth = require("../middleware/isAuth");
-const isOwner = require("../middleware/isOwner");
+const { isFolderOwner } = require("../middleware/isOwner");
 const router = new Router();
 const folderController = require("../controllers/folderController");
 
@@ -9,19 +9,19 @@ router.post("/:folderId/make-folder", isAuth, folderController.makeFolderPost);
 router.get(
   "/folder/:folderId/details",
   isAuth,
-  isOwner,
+  isFolderOwner,
   folderController.detailsGet
 );
 router.post(
   "/folder/:folderId/details",
   isAuth,
-  isOwner,
+  isFolderOwner,
   folderController.detailsPost
 );
 router.get(
   "/folder/:folderId/delete",
   isAuth,
-  isOwner,
+  isFolderOwner,
   folderController.deleteGet
 );
 
