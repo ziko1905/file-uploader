@@ -16,11 +16,9 @@
         <span>Welcome back <%= locals.user.firstName %></span>
         <div class="files-container">
             <% files.forEach(obj => { %>
-                <% if (obj.type == "FOLDER") { %>
-                    <div class="folder"><%= obj.name %></div>
-                <% } else { %>
-                    <div class="file"><%= obj.name %></div>
-                <% } %>
+                <div class="<%= obj.type.toLocaleLowerCase() %>">
+                    <a href="folder/<%= obj.id %>/details"><%= obj.name %></a>
+                </div>
             <% }) %>
         </div>
     <% } %>

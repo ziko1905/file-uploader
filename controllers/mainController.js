@@ -2,8 +2,11 @@ const asyncHandler = require("express-async-handler");
 const queries = require("../db/queries");
 
 const homepageGet = asyncHandler(async (req, res) => {
-  const children = await queries.getChildren(req.folder.id);
-  res.render("index", { title: req.folder.name, files: children });
+  if (req.user) {
+    const children = await queries.getChildren(req.folder.id);
+    return res.render("index", { title: req.folder.name, files: children });
+  }
+  res.render("index", { title: "File Uploader" });
 });
 
 module.exports = {
