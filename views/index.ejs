@@ -18,6 +18,11 @@
             <% files.forEach(obj => { %>
                 <div class="<%= obj.type.toLocaleLowerCase() %>">
                     <a href="/<%= obj.type.toLocaleLowerCase() %>/<%= obj.id %>"><%= obj.name %></a>
+                    <% if (obj.type == "FOLDER") {%>
+                        <form action="/folder/<%= obj.id%>/details">
+                            <button type="submit">Details</button>
+                        </form>
+                    <% } %>
                 </div>
             <% }) %>
         </div>
