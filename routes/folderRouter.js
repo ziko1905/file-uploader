@@ -3,6 +3,8 @@ const isAuth = require("../middleware/isAuth");
 const { isFolderOwner } = require("../middleware/isOwner");
 const router = new Router();
 const folderController = require("../controllers/folderController");
+const setFolder = require("../middleware/setFolder");
+const { homepageGet } = require("../controllers/mainController");
 
 router.get("/:folderId/make-folder", isAuth, folderController.makeFolderGet);
 router.post("/:folderId/make-folder", isAuth, folderController.makeFolderPost);
@@ -24,5 +26,6 @@ router.get(
   isFolderOwner,
   folderController.deleteGet
 );
+router.get("/folder/:folderId", isAuth, isFolderOwner, setFolder, homepageGet);
 
 module.exports = router;
