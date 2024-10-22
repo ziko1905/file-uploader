@@ -17,7 +17,7 @@
         <div class="files-container">
             <% files.forEach(obj => { %>
                 <div class="<%= obj.type.toLocaleLowerCase() %>">
-                    <a href="<%= obj.type.toLocaleLowerCase() %>/<%= obj.id %>/details"><%= obj.name %></a>
+                    <a href="/<%= obj.type.toLocaleLowerCase() %>/<%= obj.id %>"><%= obj.name %></a>
                 </div>
             <% }) %>
         </div>

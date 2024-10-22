@@ -7,6 +7,7 @@ const getFileExtension = require("../utils/getFileExtension");
 const queries = require("../db/queries");
 
 function uploadFileGet(req, res) {
+  console.log(req.params.folderId, "weird errerrer");
   res.render("uploadFile");
 }
 
@@ -16,6 +17,7 @@ const uploadFilePost = [
     if (!req.file) {
       return res.redirect(req.originalUrl);
     }
+    console.log(req.params.folderId, "weird");
     await queries.addFileToFolder(
       req.params.folderId,
       convertFilename(req.file.originalname),

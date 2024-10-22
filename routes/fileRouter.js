@@ -2,10 +2,24 @@ const { Router } = require("express");
 const fileController = require("../controllers/fileController");
 const isAuth = require("../middleware/isAuth");
 const router = new Router();
-const { isFileOwner } = require("../middleware/isOwner");
+const { isFileOwner, isFolderOwner } = require("../middleware/isOwner");
+const setFolder = require("../middleware/setFolder");
 
-router.get("/:fileId/upload", isAuth, fileController.uploadFileGet);
-router.post("/:fileId/upload", isAuth, fileController.uploadFilePost);
+// First param is not file id, it represents folder of insertion
+router.get(
+  "/:folderId/upload",
+  isAuth,
+  isFolderOwner,
+  setFolder,
+  fileController.uploadFileGet
+);
+router.post(
+  "/:folderId/upload",
+  isAuth,
+  isFolderOwner,
+  setFolder,
+  fileController.uploadFilePost
+);
 router.get(
   "/file/:fileId/details",
   isAuth,
