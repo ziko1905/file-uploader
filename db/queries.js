@@ -56,7 +56,6 @@ module.exports.addFileToFolder = async (
   extension,
   size
 ) => {
-  console.log(folderId, "QUERY");
   await prisma.folder.update({
     where: {
       id: +folderId,
