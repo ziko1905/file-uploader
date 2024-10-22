@@ -6,12 +6,18 @@ const folderController = require("../controllers/folderController");
 const setFolder = require("../middleware/setFolder");
 const { homepageGet } = require("../controllers/mainController");
 
-router.get("/:folderId/make-folder", isAuth, folderController.makeFolderGet);
+router.get(
+  "/:folderId/make-folder",
+  isAuth,
+  setFolder,
+  folderController.makeFolderGet
+);
 router.post("/:folderId/make-folder", isAuth, folderController.makeFolderPost);
 router.get(
   "/folder/:folderId/details",
   isAuth,
   isFolderOwner,
+  setFolder,
   folderController.detailsGet
 );
 router.post(
@@ -24,6 +30,7 @@ router.get(
   "/folder/:folderId/delete",
   isAuth,
   isFolderOwner,
+  setFolder,
   folderController.deleteGet
 );
 router.get("/folder/:folderId", isAuth, isFolderOwner, setFolder, homepageGet);

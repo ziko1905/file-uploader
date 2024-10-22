@@ -95,6 +95,7 @@ module.exports.getChildren = async (folderId) => {
 };
 
 module.exports.makeFolder = async (parentFolderId, folderName, userId) => {
+  console.log(parentFolderId);
   await prisma.folder.create({
     data: {
       parentFolderId: +parentFolderId,
