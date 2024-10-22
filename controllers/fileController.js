@@ -25,13 +25,13 @@ const uploadFilePost = [
       req.file.size
     );
 
-    return res.redirect("/");
+    return res.redirect(`/folder/${req.params.folderId}`);
   }),
 ];
 
 const detailsGet = asyncHandler(async (req, res) => {
   res.locals.file = await queries.getFileById(req.params.fileId);
-  res.render("fileDetails");
+  res.render("fileDetails", { postUrl: req.originalUrl });
 });
 
 const detailsPost = asyncHandler(async (req, res) => {

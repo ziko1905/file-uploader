@@ -21,22 +21,11 @@ router.post(
   fileController.uploadFilePost
 );
 router.get(
-  "/file/:fileId/details",
-  isAuth,
-  isFileOwner,
-  fileController.detailsGet
-);
-router.post(
-  "/file/:fileId/details",
-  isAuth,
-  isFileOwner,
-  fileController.detailsPost
-);
-router.get(
   "/file/:fileId/delete",
   isAuth,
   isFileOwner,
   fileController.deleteGet
 );
-
+router.get("/file/:fileId", isAuth, isFileOwner, fileController.detailsGet);
+router.post("/file/:fileId", isAuth, isFileOwner, fileController.detailsPost);
 module.exports = router;

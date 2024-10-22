@@ -12,7 +12,7 @@
     <h2>Type: <%= locals.file.extension %></h2>
     <h3><%= locals.file.creationDate %></h3>
     <h2>Update:</h2>
-    <form action="/file/<%= locals.file.id %>/details" method="POST">
+    <form action="<%= postUrl %>" method="POST">
         <label for="name">file name:</label>
         <input value="<%= locals.file.name %>" type="text" name="name" id="name">
         <button type="submit">Update</button>
