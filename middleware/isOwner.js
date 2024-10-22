@@ -9,7 +9,7 @@ module.exports.isFileOwner = asyncHandler(async (req, res, next) => {
 });
 
 module.exports.isFolderOwner = asyncHandler(async (req, res, next) => {
-  if (await queries.checkFolderOwner(req.params.fileId, req.user.id)) {
+  if (await queries.checkFolderOwner(req.params.folderId, req.user.id)) {
     return next();
   }
   res.redirect("/");
