@@ -54,7 +54,8 @@ module.exports.addFileToFolder = async (
   folderId,
   fileName,
   extension,
-  size
+  size,
+  url
 ) => {
   await prisma.folder.update({
     where: {
@@ -66,6 +67,7 @@ module.exports.addFileToFolder = async (
           name: fileName,
           extension: extension,
           size: size,
+          url: url,
         },
       },
     },

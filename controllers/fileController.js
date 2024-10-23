@@ -1,7 +1,8 @@
 const asyncHandler = require("express-async-handler");
 const multer = require("multer");
-const path = require("node:path");
-const upload = multer({ dest: path.join(__dirname, "../media/") });
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
+const cloud = require("../middleware/cloud");
 const convertFilename = require("../utils/convertFilename");
 const getFileExtension = require("../utils/getFileExtension");
 const queries = require("../db/queries");
@@ -12,6 +13,7 @@ function uploadFileGet(req, res) {
 
 const uploadFilePost = [
   upload.single("file"),
+  cloud.uploadFile,
   asyncHandler(async (req, res) => {
     if (!req.file) {
       return res.redirect(req.originalUrl);
@@ -20,7 +22,8 @@ const uploadFilePost = [
       req.params.folderId,
       convertFilename(req.file.originalname),
       getFileExtension(req.file.originalname),
-      req.file.size
+      req.file.size,
+      req.file.url.secure_url
     );
 
     return res.redirect(`/folder/${req.params.folderId}`);

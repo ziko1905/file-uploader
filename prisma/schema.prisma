@@ -50,6 +50,7 @@ model File {
   uploadDate DateTime @default(now())
   extension  String   @db.VarChar(32)
   size       Int?
+  url        String
   type       Type     @default(FILE)
   Folder     Folder   @relation(fields: [folderId], references: [id])
   folderId   Int
