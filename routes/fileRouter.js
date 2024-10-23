@@ -26,6 +26,12 @@ router.get(
   isFileOwner,
   fileController.deleteGet
 );
+router.get(
+  "/file/:fileId/download",
+  isAuth,
+  isFileOwner,
+  fileController.downloadGet
+);
 router.get("/file/:fileId", isAuth, isFileOwner, fileController.detailsGet);
 router.post("/file/:fileId", isAuth, isFileOwner, fileController.detailsPost);
 module.exports = router;

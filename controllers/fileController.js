@@ -37,6 +37,12 @@ const detailsPost = asyncHandler(async (req, res) => {
   res.redirect(req.originalUrl);
 });
 
+const downloadGet = asyncHandler(async (req, res) => {
+  // WIP: logic for fetching file from cloud storage
+
+  res.redirect("/");
+});
+
 const deleteGet = asyncHandler(async (req, res) => {
   await queries.deleteFile(req.params.fileId);
   res.redirect("/");
@@ -48,4 +54,5 @@ module.exports = {
   detailsGet,
   detailsPost,
   deleteGet,
+  downloadGet,
 };

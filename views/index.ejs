@@ -22,6 +22,10 @@
                         <form action="/folder/<%= obj.id%>/details">
                             <button type="submit">Details</button>
                         </form>
+                    <% } else if (obj.type == "FILE") { %>
+                        <form action="/file/<%= obj.id %>/download">
+                            <button type="submit">Download</button>
+                        </form>
                     <% } %>
                 </div>
             <% }) %>

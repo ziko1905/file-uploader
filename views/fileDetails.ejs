@@ -20,5 +20,8 @@
     <form action="/file/<%= locals.file.id %>/delete" method="GET">
         <button type="submit" onclick="return confirm('Are you sure you want to delete the file?')">Delete</button>
     </form>
+    <form action="/file/<%= locals.file.id %>/download" method="GET">
+        <button type="submit">Download</button>
+    </form>
 </body>
 </html>
