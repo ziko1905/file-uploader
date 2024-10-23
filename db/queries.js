@@ -156,6 +156,15 @@ module.exports.updateFile = async (id, fileName) => {
   });
 };
 
+module.exports.getFileUrl = async (id) => {
+  const file = await prisma.file.findFirst({
+    where: {
+      id: +id,
+    },
+  });
+  return file.url;
+};
+
 module.exports.getFolderById = async (folderId) => {
   return await prisma.folder.findFirst({
     where: {

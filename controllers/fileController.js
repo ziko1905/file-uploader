@@ -6,6 +6,7 @@ const cloud = require("../middleware/cloud");
 const convertFilename = require("../utils/convertFilename");
 const getFileExtension = require("../utils/getFileExtension");
 const queries = require("../db/queries");
+const https = require("node:https");
 
 function uploadFileGet(req, res) {
   res.render("uploadFile");
@@ -41,9 +42,15 @@ const detailsPost = asyncHandler(async (req, res) => {
 });
 
 const downloadGet = asyncHandler(async (req, res) => {
-  // WIP: logic for fetching file from cloud storage
-
-  res.redirect("/");
+  const fileQ = await queries.getFileById(req.params.fileId);
+  https.get(fileQ.url, (file) => {
+    res.set(
+      "Content-disposition",
+      "attachment; filename=" + encodeURI(fileQ.name + fileQ.extension)
+    );
+    res.set("Content-Type", "text/plain");
+    file.pipe(res);
+  });
 });
 
 const deleteGet = asyncHandler(async (req, res) => {
