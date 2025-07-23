@@ -1,7 +1,7 @@
 <h1 align="center"> Cloud File Uploader </h1>
 
-<p align="center" font-size="16px">
-  Cloud File Uploader is a service that enables clients to store their files online. This project is a demonstration of my PrismaORM and Express skills. User can upload their files to the server, view file size in bytes, and rename or delete uploaded files. Users can also create folders for easier arrangements and sorting of their files. App also provides authentication and authorization for secure storage of files.
+<p align="center">
+  Cloud File Uploader is a service that enables clients to store their files online. This project is a demonstration of my PrismaORM and Express skills. User can upload their files to the server, view file size in bytes, and rename or delete uploaded files. Users can also create folders for easier arrangements and sorting of their files. Cloud File Uploader also implements authentication and authorization for secure storage of files.
 </p>
 
 ## Live Application
